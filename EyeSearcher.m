@@ -30,10 +30,15 @@ while(~endFlag)
     ImageHBinary = imbinarize(ImageHBinary);
     ImageVBinary = medfilt2(ImageVBinary,[7 7]);
     %ImageHBinary = medfilt2(ImageHBinary,[15 15]);
+    try
     s = regionprops(ImageVBinary,'centroid','area');
     centroids = cat(1,s.Centroid);
-    imshow(ImageHSV);
+    imshow(ImageVBinary);
     hold on;
     plot(centroids(:,1),centroids(:,2),'*b');
     hold off;
+    endFlag = size(ImageVBinary(:),1)<(sum(sum(ImageVBinary == 1))*4);
+    catch
+        %endFlag = true;
+    end
 end
