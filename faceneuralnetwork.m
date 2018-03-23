@@ -1,6 +1,6 @@
 function winner = faceneuralnetwork(testImage)
-%load('weightMatrix');
-%load('Matrix Images');
+%load('weightMatrix.mat');
+%load('Matrix Images.mat');
 % actual comparison
 %May want to run twice for both eyes
 inputImage = testImage(:)';
@@ -9,14 +9,7 @@ compare=inputImage*weights;
 
 %Flattens the compare array for comparison
 compare = compare';
-compare = compare/255;
-for i=1:length(compare)
-    if compare(i)>0.75
-        compare(i)=1;
-    else
-        compare(i)=-1;
-    end
-end
+compare = imageThresholder(compare);
 
 %Compares the compare array to the original flattened images
 scoreVal= zeros(numPatterns,1);

@@ -78,6 +78,9 @@ while good == 0
 end
 clear cam;
 close all;
+
+%IMPORTANT
+%Stores Images for further use.
 %Images must be cropped or resized before processing them.
 rawImages(1,:) = ImageFlattener(downright);
 rawImages(2,:) = ImageFlattener(upright);
