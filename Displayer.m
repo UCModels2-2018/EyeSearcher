@@ -1,6 +1,6 @@
 %Font
 clear; close all; clc;
-[X1,map1]=imread('Impact.png');
+[X1,map1]=imread('Impact.png'); % Choose between 'Impact' | 'FrenchScriptMT' | 'TimesNewRoman'
 [X2,map2]=imread('FrenchScriptMT.png');
 subplot(1,3,1), imshow(X1,map1)
 subplot(1,3,3), imshow(X2,map2)
