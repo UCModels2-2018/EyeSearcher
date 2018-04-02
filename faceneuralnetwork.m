@@ -1,9 +1,10 @@
 function winner = faceneuralnetwork(testImage)
-%load('weightMatrix.mat');
-%load('Matrix Images.mat');
+load('weightMatrix.mat');
+load('Matrix Images.mat');
 % actual comparison
 %May want to run twice for both eyes
-inputImage = testImage(:)';
+inputImage = ImageResizer(testImage);
+inputImage = single(inputImage(:)');
 numPatterns = size(rawImages,1);
 compare=inputImage*weights;
 

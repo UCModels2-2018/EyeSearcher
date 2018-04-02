@@ -4,10 +4,10 @@ function [outputArray] = imageThresholder(inputArray)
 inputArray = inputArray/255;
 outputArray = inputArray;
 for j = 1: length(inputArray)    
-    if inputArray(1i)>0.75
-        outputArray(li)=1;
+    if inputArray(j)>0.75
+        outputArray(j)=1;
     else
-        outputArray(li)=-1;
+        outputArray(j)=-1;
     end
 end
 end

@@ -78,88 +78,15 @@ function calibrate_Callback(hObject, eventdata, handles)
 % hObject    handle to calibrate (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear all;
-webcamlist  
-cam = webcam(1); 
-
-%Bottom right
-good = 0
-while good == 0
-
-f = msgbox('Please look at the BOTTOM RIGHT corner of the screen');
-
-pause(3);
-downright = snapshot(cam);
-image(downright)
-
-answer = menu('Is this a good picture?','Yes','No');
-
-if answer == 1
-    good = 1;
-else 
-    good = 0;
-end
-end
-
-
-% %Top right
-good =0;
-while good == 0
-
-f = msgbox('Please look at the TOP RIGHT corner of the screen');
-pause(3);
-upright = snapshot(cam);
-image(upright)
-answer = menu('Is this a good picture?','Yes','No');
-
-if answer == 1
-    good = 1;
-else 
-    good = 0;
-end
-end
-% %Top left
-good = 0;
-while good == 0
-
-f = msgbox('Please look at the TOP LEFT corner of the screen');
-pause(3);
-upleft = snapshot(cam);
-image(upleft)
-answer = menu('Is this a good picture?','Yes','No');
-
-if answer == 1
-    good = 1;
-else 
-    good = 0;
-end
-end
- 
-% %Bottom left
-good = 0;
-while good == 0
-
-f = msgbox('Please look at the BOTTOM LEFT corner of the screen');
-pause(3);
-downleft = snapshot(cam);
-image(downleft)
-answer = menu('Is this a good picture?','Yes','No')
-
-if answer == 1
-    good = 1;
-else 
-    good = 0;
-end
-end
-
-%IMPORTANT
-%Stores Images for further use.
-%Images must be cropped or resized before processing them. ,.m 
-rawImages(1,:) = ImageFlattener(downright);
-rawImages(2,:) = ImageFlattener(upright);
-rawImages(3,:) = ImageFlattener(upleft);
-rawImages(4,:) = ImageFlattener(downleft);
+calibration
+load('Matrix Images.mat');
+rawImages(1,:) = ImageFlattener(croppedImage);
+clear croppedImage;
+calibration
+load('Matrix Images.mat');
+rawImages(2,:) = ImageFlattener(croppedImage);
 save('Matrix Images.mat','rawImages');
+weightMatrixCreater(rawImages);
 
 % --- Executes on button press in test1.
 function test1_Callback(hObject, eventdata, handles)
@@ -173,6 +100,10 @@ clear; close all; clc;
 subplot(1,3,1), imshow(X1,map1)
 subplot(1,3,3), imshow(X2,map2)
 set(gcf, 'Position', get(0, 'Screensize'));
+pause(0.415)
+image = snapshot(webcam(1));
+figure;
+imshow(image);
 
 % --- Executes on button press in test2.
 function test2_Callback(hObject, eventdata, handles)
@@ -191,6 +122,11 @@ image(:,1101:1400,2) = 0;  %Green on the right
 image(:,1101:1400,3) = 0;  %Blue on the right
 imshow(image)
 set(gcf, 'Position', get(0, 'Screensize'));
+pause(0.415)
+image = snapshot(webcam(1));
+figure;
+imshow(image);
+
 
 % --- Executes on button press in test3.
 function test3_Callback(hObject, eventdata, handles)
@@ -204,3 +140,7 @@ clear; close all; clc;
 subplot(1,3,1), imshow(X1,map1)
 subplot(1,3,3), imshow(X2,map2)
 set(gcf, 'Position', get(0, 'Screensize'));
+pause(0.415)
+image = snapshot(webcam(1));
+figure;
+imshow(image);

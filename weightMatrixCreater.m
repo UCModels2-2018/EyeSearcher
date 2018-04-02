@@ -1,6 +1,7 @@
+function weightMatrixCreater(rawImages)
 clc;
 %load('Matrix Images.mat');
-weights = zeros(size(rawImages,2), size(rawImages,2));
+weights = zeros(size(rawImages,2), size(rawImages,2),'single');
 for j = 1:size(rawImages,1)
     weights = weights + (rawImages(j,:)')*(rawImages(j,:));
 end
